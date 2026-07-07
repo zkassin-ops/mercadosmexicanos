@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0e1013">
+<title>Mercados Mexicanos — Mercado digital con acceso de membresía</title>
+<style>
+/* ============================================================
+   MERCADOS MEXICANOS · v2.0 · Edición profesional
+   ============================================================ */
+:root{
+  --bg:#0e1013; --panel:#15181d; --panel2:#1a1e24; --line:#262b33; --line2:#30363f;
+  --txt:#e8eaed; --mut:#98a0ac; --dim:#6b7482;
+  --acc:#2e7d5b; --acc-d:#215c43; --acc-l:#5eb08c;
+  --warn:#b9862f; --warn-bg:#241d0e; --danger:#a94442; --danger-bg:#241214;
+  --paper:#f6f5f1; --ink:#22261f;
+  --r:10px; --nav:60px;
+  --serif:Georgia,'Times New Roman',serif;
+  --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{font-family:var(--sans);background:var(--bg);color:var(--txt);overflow-x:hidden;font-size:15px;line-height:1.5}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+input,select,textarea{font-family:inherit}
+svg{display:block}
+::selection{background:var(--acc);color:#fff}
+
+/* ---------- SPLASH ---------- */
+#splash{position:fixed;inset:0;z-index:1000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:var(--bg);transition:opacity .5s}
+#splash.hide{opacity:0;pointer-events:none}
+.brandmark{width:64px;height:64px;border:1px solid var(--line2);border-radius:14px;display:flex;align-items:center;justify-content:center;background:var(--panel);animation:mark .8s ease both}
+.brandmark span{font-family:var(--serif);font-size:26px;color:var(--acc-l);letter-spacing:1px}
+@keyframes mark{from{opacity:0;transform:scale(.85)}to{opacity:1;transform:none}}
+#splash h1{font-family:var(--serif);font-size:22px;font-weight:600;letter-spacing:.4px;animation:fade .9s .2s both}
+#splash p{color:var(--mut);font-size:12.5px;letter-spacing:2.5px;text-transform:uppercase;animation:fade .9s .4s both}
+.splash-bar{width:110px;height:2px;background:var(--line);overflow:hidden;margin-top:8px;animation:fade .9s .5s both}
+.splash-bar i{display:block;height:100%;width:36%;background:var(--acc-l);animation:bar 1.5s infinite}
+@keyframes bar{from{transform:translateX(-110%)}to{transform:translateX(310%)}}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* ---------- SHELL ---------- */
+#app{display:none;min-height:100%}
+#app.on{display:block}
+.view{display:none;padding-bottom:calc(var(--nav) + 26px);min-height:100vh}
+.view.on{display:block;animation:vin .3s ease}
+@keyframes vin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.wrap{max-width:640px;margin:0 auto;padding:0 18px}
+.topbar{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:12px;padding:13px 18px;background:rgba(14,16,19,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.topbar .tb-mark{width:32px;height:32px;border:1px solid var(--line2);border-radius:8px;display:flex;align-items:center;justify-content:center;background:var(--panel);flex-shrink:0}
+.topbar .tb-mark span{font-family:var(--serif);font-size:13px;color:var(--acc-l)}
+.topbar h1{font-size:15px;font-weight:600;flex:1;letter-spacing:.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.topbar .tb-btn{width:34px;height:34px;border:1px solid var(--line);border-radius:8px;display:flex;align-items:center;justify-content:center;background:var(--panel);color:var(--mut);flex-shrink:0;position:relative}
+.topbar .tb-btn b{position:absolute;top:-5px;right:-5px;min-width:16px;height:16px;border-radius:8px;background:var(--acc);color:#fff;font-size:10px;display:flex;align-items:center;justify-content:center;padding:0 4px}
+#navbar{position:fixed;bottom:0;left:0;right:0;z-index:60;height:var(--nav);display:flex;background:rgba(17,19,23,.96);backdrop-filter:blur(14px);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom)}
+#navbar button{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:10px;font-weight:600;color:var(--dim);letter-spacing:.3px}
+#navbar button svg{stroke:var(--dim)}
+#navbar button.on{color:var(--acc-l)}
+#navbar button.on svg{stroke:var(--acc-l)}
+
+/* ---------- ELEMENTS ---------- */
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--acc-l)}
+h2.title{font-family:var(--serif);font-size:24px;font-weight:600;line-height:1.25;margin:6px 0 8px}
+.lead{color:var(--mut);font-size:14px;line-height:1.6}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:18px}
+.panel.tight{padding:14px 16px}
+.btn{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;padding:14px;border-radius:9px;font-size:14px;font-weight:600;letter-spacing:.2px;transition:filter .15s,transform .1s;border:1px solid transparent}
+.btn:active{transform:scale(.985)}
+.btn-p{background:var(--acc);color:#fff}
+.btn-p:hover{filter:brightness(1.08)}
+.btn-o{background:transparent;border-color:var(--line2);color:var(--txt)}
+.btn-d{background:transparent;border-color:var(--line);color:var(--danger)}
+.btn-sm{padding:10px 12px;font-size:12.5px;width:auto}
+.sec{display:flex;align-items:baseline;justify-content:space-between;margin:26px 0 12px}
+.sec h3{font-size:12px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;color:var(--mut)}
+.sec span{font-size:12.5px;color:var(--acc-l);font-weight:600;cursor:pointer}
+.status{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;padding:5px 10px;border-radius:6px;border:1px solid}
+.status::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.status.pend{color:var(--warn);border-color:#4a3a17;background:var(--warn-bg)}
+.status.act{color:var(--acc-l);border-color:#1e4634;background:#12211a}
+.status.rej{color:#d98481;border-color:#4a2423;background:var(--danger-bg)}
+.status.ven{color:#d98481;border-color:#4a2423;background:var(--danger-bg)}
+.kv{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:11px 0;border-bottom:1px solid var(--line);font-size:13.5px}
+.kv:last-child{border-bottom:none}
+.kv span{color:var(--mut);flex-shrink:0}
+.kv b{font-weight:600;text-align:right;word-break:break-all}
+.kv .mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.5px}
+.copybtn{border:1px solid var(--line2);color:var(--acc-l);font-size:11px;font-weight:700;padding:5px 10px;border-radius:6px;margin-left:10px;flex-shrink:0;background:var(--panel2)}
+.notice{border-left:3px solid var(--acc);background:var(--panel);padding:13px 16px;border-radius:0 var(--r) var(--r) 0;font-size:13px;color:var(--mut);line-height:1.6}
+.notice b{color:var(--txt)}
+.notice.warn{border-left-color:var(--warn)}
+.divider{height:1px;background:var(--line);margin:24px 0}
+.f-group{margin-bottom:15px}
+.f-group label{display:block;font-size:11.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--mut);margin-bottom:7px}
+.f-group input,.f-group select{width:100%;padding:13px 14px;border-radius:8px;background:var(--panel);border:1px solid var(--line2);color:var(--txt);font-size:15px;outline:none;transition:border-color .15s}
+.f-group input:focus,.f-group select:focus{border-color:var(--acc)}
+.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:14px 10px;text-align:center}
+.stat b{display:block;font-family:var(--serif);font-size:21px;color:var(--txt)}
+.stat span{font-size:10.5px;color:var(--mut);letter-spacing:1px;text-transform:uppercase}
+
+/* ---------- LANDING ---------- */
+.hero-band{border:1px solid var(--line);border-radius:14px;overflow:hidden;margin:18px 0;background:linear-gradient(160deg,#141a17 0%,#10141a 100%)}
+.hero-band .hb-top{padding:26px 22px 20px;border-bottom:1px solid var(--line)}
+.hero-band .hb-strip{display:flex;gap:0}
+.hero-band .hb-strip div{flex:1;padding:12px 8px;text-align:center;border-right:1px solid var(--line);font-size:11px;color:var(--mut);letter-spacing:.5px}
+.hero-band .hb-strip div:last-child{border-right:none}
+.hero-band .hb-strip b{display:block;font-family:var(--serif);font-size:17px;color:var(--acc-l);margin-bottom:2px}
+.ticker{overflow:hidden;white-space:nowrap;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin:20px -18px;padding:10px 0;background:var(--panel)}
+.ticker div{display:inline-block;animation:tk 40s linear infinite;font-size:11.5px;color:var(--dim);letter-spacing:1.5px;text-transform:uppercase}
+@keyframes tk{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.plan{border:1px solid var(--line);border-radius:var(--r);background:var(--panel);padding:18px;cursor:pointer;transition:border-color .15s;position:relative;margin-bottom:11px}
+.plan.sel{border-color:var(--acc)}
+.plan .p-tag{position:absolute;top:-9px;left:16px;background:var(--acc);color:#fff;font-size:9.5px;font-weight:800;letter-spacing:1.2px;padding:3px 9px;border-radius:4px;text-transform:uppercase}
+.plan h4{font-size:15px;font-weight:700}
+.plan .p-price{font-family:var(--serif);font-size:26px;margin:6px 0 2px}
+.plan .p-price small{font-family:var(--sans);font-size:12px;color:var(--mut)}
+.plan ul{list-style:none;margin-top:10px;border-top:1px solid var(--line);padding-top:10px}
+.plan ul li{font-size:12.5px;color:var(--mut);padding:3.5px 0;padding-left:18px;position:relative}
+.plan ul li::before{content:"—";position:absolute;left:0;color:var(--acc-l)}
+.steps{counter-reset:s;margin:6px 0}
+.step{display:flex;gap:14px;padding:13px 0;border-bottom:1px solid var(--line)}
+.step:last-child{border-bottom:none}
+.step::before{counter-increment:s;content:"0" counter(s);font-family:var(--serif);font-size:17px;color:var(--acc-l);flex-shrink:0;width:28px;padding-top:1px}
+.step b{font-size:14px;display:block;margin-bottom:3px}
+.step p{font-size:12.5px;color:var(--mut);line-height:1.55}
+
+/* ---------- MERCADO ---------- */
+.dept-list{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.dept{border:1px solid var(--line);border-radius:var(--r);background:var(--panel);padding:14px;cursor:pointer;transition:border-color .15s;display:flex;align-items:center;gap:12px}
+.dept:active{border-color:var(--acc)}
+.dept .d-mk{width:38px;height:38px;border-radius:8px;border:1px solid var(--line2);background:var(--panel2);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:15px;color:var(--acc-l);flex-shrink:0}
+.dept b{font-size:13px;display:block;line-height:1.3}
+.dept small{font-size:11px;color:var(--dim)}
+.ptabs{display:flex;gap:8px;overflow-x:auto;padding:2px 0 12px;scrollbar-width:none}
+.ptabs::-webkit-scrollbar{display:none}
+.ptabs button{flex-shrink:0;padding:9px 15px;border-radius:7px;border:1px solid var(--line);background:var(--panel);color:var(--mut);font-size:12.5px;font-weight:600}
+.ptabs button.on{border-color:var(--acc);color:var(--acc-l);background:#12211a}
+.shopcard{border:1px solid var(--line);border-radius:var(--r);background:var(--panel);padding:15px;cursor:pointer;margin-bottom:10px;transition:border-color .15s}
+.shopcard:active{border-color:var(--acc)}
+.shopcard .sc-top{display:flex;gap:13px;align-items:center}
+.shopcard .sc-mk{width:46px;height:46px;border-radius:9px;border:1px solid var(--line2);background:var(--panel2);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:18px;color:var(--txt);flex-shrink:0}
+.shopcard .sc-t b{font-size:14.5px;display:block}
+.shopcard .sc-t small{font-size:12px;color:var(--mut)}
+.shopcard .sc-num{margin-left:auto;font-family:ui-monospace,Menlo,monospace;font-size:11px;color:var(--dim);border:1px solid var(--line);padding:4px 8px;border-radius:5px;flex-shrink:0}
+.shopcard .sc-promo{margin-top:11px;padding-top:11px;border-top:1px dashed var(--line);font-size:12px;color:var(--warn)}
+.prem-chip{font-size:9.5px;font-weight:800;letter-spacing:1px;color:var(--warn);border:1px solid #4a3a17;background:var(--warn-bg);padding:2.5px 7px;border-radius:4px;text-transform:uppercase;margin-left:8px;vertical-align:2px}
+.prodrow{display:flex;align-items:center;gap:13px;border:1px solid var(--line);background:var(--panel);border-radius:var(--r);padding:12px 14px;margin-bottom:9px}
+.prodrow .pr-mk{width:40px;height:40px;border-radius:8px;background:var(--panel2);border:1px solid var(--line2);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:14px;color:var(--mut);flex-shrink:0}
+.prodrow .pr-i{flex:1;min-width:0}
+.prodrow .pr-i b{font-size:13.5px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.prodrow .pr-i small{font-size:12px;color:var(--acc-l);font-weight:700}
+.prodrow button{border:1px solid var(--line2);color:var(--txt);font-size:12px;font-weight:700;padding:8px 13px;border-radius:7px;background:var(--panel2);flex-shrink:0}
+.shop-head{border:1px solid var(--line);border-radius:14px;background:var(--panel);padding:20px;margin:16px 0}
+.shop-head .sh-row{display:flex;gap:15px;align-items:center}
+.shop-head .sh-mk{width:58px;height:58px;border-radius:12px;border:1px solid var(--line2);background:var(--panel2);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:23px}
+.shop-head h2{font-family:var(--serif);font-size:20px}
+.shop-head .sh-meta{font-size:12.5px;color:var(--mut);margin-top:3px}
+.shop-head .sh-desc{font-size:13px;color:var(--mut);line-height:1.6;margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
+.shop-acts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
+.shop-acts button{border:1px solid var(--line);background:var(--panel2);color:var(--txt);font-size:12px;font-weight:600;padding:10px 6px;border-radius:8px}
+
+/* ---------- FEED ---------- */
+#view-video{padding-bottom:0}
+.feed{height:calc(100vh - var(--nav));overflow-y:auto;scroll-snap-type:y mandatory;scrollbar-width:none}
+.feed::-webkit-scrollbar{display:none}
+.reel{height:calc(100vh - var(--nav));scroll-snap-align:start;position:relative;display:flex;flex-direction:column;justify-content:flex-end;border-bottom:1px solid var(--line)}
+.reel .r-bg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.reel .r-bg span{font-family:var(--serif);font-size:110px;color:rgba(255,255,255,.05);letter-spacing:4px}
+.reel .r-body{position:relative;z-index:2;padding:0 18px 26px}
+.reel .r-who{display:flex;align-items:center;gap:11px;margin-bottom:10px}
+.reel .r-mk{width:40px;height:40px;border-radius:9px;border:1px solid var(--line2);background:var(--panel);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:15px;color:var(--acc-l)}
+.reel .r-who b{font-size:14px;display:block}
+.reel .r-who small{font-size:11.5px;color:var(--mut)}
+.reel .live-dot{font-size:9.5px;font-weight:800;letter-spacing:1px;color:#d98481;border:1px solid #4a2423;background:var(--danger-bg);padding:3px 8px;border-radius:4px;margin-left:8px;text-transform:uppercase}
+.reel p{font-size:14px;line-height:1.55;color:var(--txt);max-width:480px}
+.reel .r-acts{display:flex;gap:9px;margin-top:16px}
+.reel .r-acts button{border:1px solid var(--line2);background:rgba(21,24,29,.85);color:var(--txt);font-size:12.5px;font-weight:600;padding:10px 16px;border-radius:8px;display:flex;align-items:center;gap:7px}
+.reel .r-acts button.liked{border-color:var(--acc);color:var(--acc-l)}
+.reel .r-acts .r-buy{background:var(--acc);border-color:var(--acc);color:#fff}
+
+/* ---------- BUSCAR / RESULTADOS ---------- */
+.searchbox{display:flex;gap:9px;margin:16px 0 12px}
+.searchbox input{flex:1;padding:13px 15px;border-radius:9px;background:var(--panel);border:1px solid var(--line2);color:var(--txt);font-size:15px;outline:none}
+.searchbox input:focus{border-color:var(--acc)}
+.chip{display:inline-block;padding:7px 13px;border-radius:7px;background:var(--panel);border:1px solid var(--line);font-size:12px;color:var(--mut);font-weight:600;cursor:pointer;margin:0 6px 8px 0}
+
+/* ---------- LOCK ---------- */
+.lock-box{text-align:center;padding:44px 22px;border:1px solid var(--line);border-radius:14px;background:var(--panel);margin:18px 0}
+.lock-box .lk{width:52px;height:52px;margin:0 auto 14px;border:1px solid var(--line2);border-radius:12px;display:flex;align-items:center;justify-content:center;background:var(--panel2)}
+.lock-box h3{font-family:var(--serif);font-size:19px;margin-bottom:8px}
+.lock-box p{color:var(--mut);font-size:13.5px;line-height:1.6;max-width:380px;margin:0 auto}
+
+/* ---------- ADMIN ---------- */
+.reg{border:1px solid var(--line);border-radius:var(--r);background:var(--panel);padding:15px;margin-bottom:11px}
+.reg .rg-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.reg .rg-top b{font-size:14.5px}
+.reg .rg-top small{display:block;color:var(--dim);font-size:11.5px;font-family:ui-monospace,Menlo,monospace;margin-top:3px}
+.reg .rg-det{font-size:12.5px;color:var(--mut);line-height:1.7;margin:11px 0;padding:11px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.reg .rg-det b{color:var(--txt);font-weight:600}
+.reg .rg-btns{display:flex;gap:8px;flex-wrap:wrap}
+.reg .rg-btns .btn{flex:1;min-width:120px}
+.atabs{display:flex;gap:8px;margin:14px 0;overflow-x:auto;scrollbar-width:none}
+.atabs button{flex-shrink:0;padding:8px 14px;border-radius:7px;border:1px solid var(--line);background:var(--panel);color:var(--mut);font-size:12px;font-weight:700}
+.atabs button.on{border-color:var(--acc);color:var(--acc-l)}
+
+/* ---------- FACTURA ---------- */
+.factura{background:var(--paper);color:var(--ink);border-radius:10px;padding:26px 22px;font-size:13px;font-family:var(--sans)}
+.factura .fx-head{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:2px solid var(--ink);padding-bottom:14px;margin-bottom:14px}
+.factura .fx-head h4{font-family:var(--serif);font-size:17px;letter-spacing:.3px}
+.factura .fx-head small{color:#6a705f;display:block;margin-top:3px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase}
+.factura .fx-folio{text-align:right;font-family:ui-monospace,Menlo,monospace;font-size:12px;color:#444a3d}
+.factura .fx-folio b{display:block;font-size:14px;color:var(--ink)}
+.factura .fx-line{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px dotted #c9cbbd}
+.factura .fx-line span{color:#6a705f}
+.factura .fx-line b{font-weight:600;text-align:right}
+.factura .fx-total{display:flex;justify-content:space-between;margin-top:12px;padding-top:12px;border-top:2px solid var(--ink);font-size:16px;font-weight:700}
+.factura .fx-stamp{margin:18px auto 6px;width:fit-content;border:2.5px solid #2e7d5b;color:#2e7d5b;font-weight:800;font-size:13px;letter-spacing:2px;padding:7px 20px;border-radius:6px;transform:rotate(-3deg);text-transform:uppercase}
+.factura .fx-note{text-align:center;color:#6a705f;font-size:10.5px;margin-top:12px;line-height:1.5}
+
+/* ---------- MODAL / TOAST / PIN ---------- */
+.modal-bg{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.72);backdrop-filter:blur(5px);display:none;align-items:flex-end;justify-content:center}
+.modal-bg.on{display:flex;animation:vin .22s}
+.modal{background:var(--bg);border:1px solid var(--line);border-bottom:none;border-radius:16px 16px 0 0;width:100%;max-width:640px;max-height:90vh;overflow-y:auto;padding:20px 18px calc(24px + env(safe-area-inset-bottom))}
+.modal .grab{width:40px;height:4px;border-radius:2px;background:var(--line2);margin:0 auto 18px}
+#toast{position:fixed;bottom:calc(var(--nav) + 16px);left:50%;transform:translateX(-50%) translateY(16px);z-index:300;background:var(--panel2);border:1px solid var(--line2);color:var(--txt);padding:12px 18px;border-radius:9px;font-size:13px;font-weight:500;opacity:0;transition:.28s;pointer-events:none;max-width:88%;text-align:center;box-shadow:0 12px 34px rgba(0,0,0,.5)}
+#toast.on{opacity:1;transform:translateX(-50%)}
+.pin-wrap{max-width:300px;margin:34px auto;text-align:center}
+.pin-dots{display:flex;gap:12px;justify-content:center;margin:20px 0}
+.pin-dots i{width:12px;height:12px;border-radius:50%;border:1.5px solid var(--dim)}
+.pin-dots i.f{background:var(--acc-l);border-color:var(--acc-l)}
+.pin-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+.pin-grid button{padding:16px;border-radius:9px;background:var(--panel);border:1px solid var(--line);font-size:18px;font-weight:600}
+.cart-line{display:flex;align-items:center;gap:12px;border:1px solid var(--line);background:var(--panel);border-radius:var(--r);padding:12px 14px;margin-bottom:9px}
+.cart-line .qty{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.cart-line .qty button{width:28px;height:28px;border-radius:7px;border:1px solid var(--line2);background:var(--panel2);font-weight:700}
+.conn-dot{display:inline-flex;align-items:center;gap:6px;font-size:10.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--dim)}
+.conn-dot::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--dim)}
+.conn-dot.online{color:var(--acc-l)}
+.conn-dot.online::before{background:var(--acc-l)}
+@media(min-width:700px){.dept-list{grid-template-columns:repeat(3,1fr)}}
+</style>
+</head>
+<body>
+
+<div id="splash">
+  <div class="brandmark"><span>MM</span></div>
+  <h1>Mercados Mexicanos</h1>
+  <p>Mercado digital · CDMX</p>
+  <div class="splash-bar"><i></i></div>
+</div>
+
+<div id="app">
+  <div id="views"></div>
+  <nav id="navbar"></nav>
+</div>
+
+<div class="modal-bg" id="modalBg"><div class="modal" id="modalBox"></div></div>
+<div id="toast"></div>
+
+<script>
+/* ============================================================
+   CONFIGURACIÓN — edita solo esta sección
+   ============================================================ */
+const CONFIG = {
+  APP_NAME: "Mercados Mexicanos",
+  // --- Pagos (SPEI) ---
+  CLABE: "684180344000000044",
+  BANCO: "Transfer (Cuenta Identidad)",
+  BENEFICIARIO: "Mercado Mexicano",
+  PRECIO_CLIENTE: 12,
+  PRECIO_LOCAL: 29,
+  PRECIO_PREMIUM: 59,
+  // --- Contacto ---
+  WHATSAPP_ADMIN: "",              // ej. "525535977670" para recibir avisos de pago
+  // --- Base de datos (Supabase) — ver GUIA-INSTALACION.md ---
+  SUPABASE_URL: "https://jkgopaqpykotzdgftmme.supabase.co",                // ej. ""
+  SUPABASE_ANON_KEY: "sb_publishable_Y7ppYgl02j8_6H9Q9qh3hQ_peuqsnyq",
+  // --- Solo para modo demo (sin base de datos conectada) ---
+  ADMIN_PIN_DEMO: "2026"
+};
+
+/* ============================================================
+   ICONOS (SVG inline)
+   ============================================================ */
+const ICONS = {
+  market:'M3 9l1-5h16l1 5M3 9v11h18V9M3 9h18M9 20v-6h6v6',
+  video:'M23 7l-7 5 7 5V7zM14 5H3a2 2 0 00-2 2v10a2 2 0 002 2h11a2 2 0 002-2V7a2 2 0 00-2-2z',
+  search:'M11 19a8 8 0 100-16 8 8 0 000 16zM21 21l-4.35-4.35',
+  user:'M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 11a4 4 0 100-8 4 4 0 000 8z',
+  key:'M21 2l-2 2m-7.61 7.61a5.5 5.5 0 11-7.778 7.778 5.5 5.5 0 017.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4',
+  lock:'M19 11H5a2 2 0 00-2 2v7a2 2 0 002 2h14a2 2 0 002-2v-7a2 2 0 00-2-2zM7 11V7a5 5 0 0110 0v4',
+  check:'M20 6L9 17l-5-5',
+  left:'M15 18l-6-6 6-6',
+  cart:'M9 22a1 1 0 100-2 1 1 0 000 2zM20 22a1 1 0 100-2 1 1 0 000 2zM1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6',
+  file:'M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8zM14 2v6h6M16 13H8M16 17H8M10 9H8',
+  shield:'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'
+};
+function ico(n,s=20,c="currentColor"){return `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="${c}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="${ICONS[n]}"/></svg>`;}
+
+/* ============================================================
+   DATOS DEL MERCADO (directorio demo)
+   ============================================================ */
+const DEPTS = ["Textiles","Papelería","Camisas","Pelucas","Coches","Ferretería","Abarrotes","Desechables","Flores","Cabello","Ropa","Accesorios","Joyería","Cosméticos","Farmacia","Oficina","Juguetes","Electrónica","Construcción","Iluminación","Seguridad","Muebles","Cocina","Hogar","Limpieza","Fiestas","Automotriz","Bienes raíces","Deportes","Electrodomésticos"];
+const NOM_PRE=["Casa","Bodega","Comercial","Distribuidora","Novedades","Almacén","Proveedora","Surtidora"];
+const NOM_SUF=["Hernández","San Juan","La Merced","Del Centro","Guadalupe","Morales","Independencia","Reforma","Aztlán","Del Valle","Nacional","Continental"];
+const PRODS=["Paquete surtido","Caja de mayoreo","Pieza individual","Media docena","Docena completa","Lote promocional"];
+const RNG=s=>{let x=s;return()=> (x=(x*9301+49297)%233280)/233280;};
+function buildMarket(){
+  const shops=[],products=[];
+  DEPTS.forEach((d,di)=>{
+    const rnd=RNG(di+11);
+    ["A","B","C","Premium"].forEach((p,pi)=>{
+      const n=p==="Premium"?1:2;
+      for(let i=0;i<n;i++){
+        const id=shops.length;
+        const nombre=NOM_PRE[Math.floor(rnd()*NOM_PRE.length)]+" "+NOM_SUF[Math.floor(rnd()*NOM_SUF.length)];
+        shops.push({id,dept:di,pasillo:p,num:(p==="Premium"?"P":p)+"-"+(pi*10+i+2),nombre,
+          ini:nombre.split(" ").map(w=>w[0]).slice(0,2).join(""),
+          rating:(4.2+rnd()*0.8).toFixed(1),premium:p==="Premium",
+          desc:"Proveedor establecido de "+d.toLowerCase()+". Mayoreo y menudeo, cotizaciones por volumen y trato directo.",
+          promo:rnd()>.5?"Descuento por volumen en pedidos de 12 piezas o más":"Envío incluido en pedidos superiores a $500"});
+        PRODS.forEach((pp,k)=>products.push({id:products.length,shop:id,dept:di,
+          name:pp+" · "+d,price:Math.round((40+rnd()*400)/5)*5}));
+      }
+    });
+  });
+  return {shops,products};
+}
+const MARKET=buildMarket();
+const REELS=[
+  {who:"Proveedora La Merced",loc:"Local P-2 · Flores",live:true,mk:"PM",cap:"Recepción de flor fresca de temporada. Precios directos de productor para pedidos de mayoreo esta semana."},
+  {who:"Distribuidora Nacional",loc:"Local A-3 · Abarrotes",live:false,mk:"DN",cap:"Nueva remesa de granos y semillas. Cotizamos por costal con entrega en zona centro."},
+  {who:"Comercial Del Valle",loc:"Local B-12 · Electrónica",live:false,mk:"CV",cap:"Accesorios de electrónica con garantía por escrito. Lote promocional disponible hasta agotar existencias."},
+  {who:"Casa Guadalupe",loc:"Local P-4 · Joyería",live:true,mk:"CG",cap:"Transmisión de inventario nuevo: chapa de oro con certificado. Aparta con el cincuenta por ciento."},
+  {who:"Almacén Reforma",loc:"Local C-22 · Ferretería",live:false,mk:"AR",cap:"Herramienta profesional a precio de bodega. Facturamos y entregamos a obra."},
+  {who:"Surtidora Continental",loc:"Local A-14 · Fiestas",live:false,mk:"SC",cap:"Todo para eventos y celebraciones. Paquetes completos para salones y organizadores."}
+];
+
+/* ============================================================
+   ALMACENAMIENTO SEGURO (con respaldo en memoria)
+   ============================================================ */
+const MEM={};
+const store={
+  get(k){ try{ return window.localStorage ? localStorage.getItem(k) : (MEM[k]??null); }catch(e){ return MEM[k]??null; } },
+  set(k,v){ try{ if(window.localStorage){ localStorage.setItem(k,v); return; } }catch(e){} MEM[k]=v; },
+  del(k){ try{ if(window.localStorage){ localStorage.removeItem(k); } }catch(e){} delete MEM[k]; }
+};
+
+/* ============================================================
+   CAPA DE DATOS — Supabase (producción) o memoria (demo)
+   ============================================================ */
+const DB={
+  mode:"demo", supa:null, demoRegs:null,
+  async init(){
+    if(CONFIG.SUPABASE_URL && CONFIG.SUPABASE_ANON_KEY){
+      try{
+        await new Promise((res,rej)=>{
+          const s=document.createElement("script");
+          s.src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2";
+          s.onload=res; s.onerror=rej; document.head.appendChild(s);
+        });
+        this.supa=window.supabase.createClient(CONFIG.SUPABASE_URL,CONFIG.SUPABASE_ANON_KEY);
+        this.mode="online";
+      }catch(e){ this.mode="demo"; }
+    }
+    if(this.mode==="demo"){
+      try{ this.demoRegs=JSON.parse(store.get("mm_demo_regs"))||[]; }catch(e){ this.demoRegs=[]; }
+      if(!this.demoRegs.length){
+        this.demoRegs=[
+          {id:1,folio:"MM-EJEMPLO1",nombre:"Registro de ejemplo (pendiente)",telefono:"5500000001",email:"ejemplo1@correo.com",tipo:"local",plan:"Local Estándar",monto:CONFIG.PRECIO_LOCAL,negocio:"Negocio Ejemplo",departamento:"Abarrotes",status:"pendiente",fecha_registro:new Date().toISOString(),comprobante:""},
+          {id:2,folio:"MM-EJEMPLO2",nombre:"Registro de ejemplo (activo)",telefono:"5500000002",email:"ejemplo2@correo.com",tipo:"premium",plan:"Local Premium",monto:CONFIG.PRECIO_PREMIUM,negocio:"Comercial Ejemplo",departamento:"Joyería",status:"activo",fecha_registro:new Date(Date.now()-86400000*3).toISOString(),fecha_pago:new Date(Date.now()-86400000*2).toISOString(),proximo_pago:addMonth(new Date(Date.now()-86400000*2)).toISOString(),factura_folio:"F-0001",comprobante:"comprobante.pdf"}
+        ];
+        this.saveDemo();
+      }
+    }
+  },
+  saveDemo(){ store.set("mm_demo_regs",JSON.stringify(this.demoRegs)); },
+  async crear(reg){
+    if(this.mode==="online"){
+      const {error}=await this.supa.from("registros").insert(reg);
+      if(error) throw new Error(error.message);
+      return reg;
+    }
+    reg.id=Date.now(); this.demoRegs.unshift(reg); this.saveDemo(); return reg;
+  },
+  async consultar(folio,tel){
+    const cf=folio.trim().toUpperCase(), ct=tel.replace(/\D/g,"");
+    if(this.mode==="online"){
+      const {data,error}=await this.supa.rpc("consultar_acceso",{p_folio:cf,p_tel:ct});
+      if(error) throw new Error(error.message);
+      return data && data.length ? data[0] : null;
+    }
+    return this.demoRegs.find(r=>r.folio.toUpperCase()===cf && r.telefono.replace(/\D/g,"")===ct)||null;
+  },
+  async adminLogin(a,b){
+    if(this.mode==="online"){
+      const {error}=await this.supa.auth.signInWithPassword({email:a,password:b});
+      if(error) throw new Error("Credenciales incorrectas");
+      return true;
+    }
+    return b===CONFIG.ADMIN_PIN_DEMO;
+  },
+  async listar(){
+    if(this.mode==="online"){
+      const {data,error}=await this.supa.from("registros").select("*").order("fecha_registro",{ascending:false});
+      if(error) throw new Error(error.message);
+      return data;
+    }
+    return [...this.demoRegs];
+  },
+  async actualizar(id,fields){
+    if(this.mode==="online"){
+      const {error}=await this.supa.from("registros").update(fields).eq("id",id);
+      if(error) throw new Error(error.message);
+      return;
+    }
+    const r=this.demoRegs.find(x=>x.id===id); Object.assign(r,fields); this.saveDemo();
+  }
+};
+
+/* ============================================================
+   ESTADO Y UTILIDADES
+   ============================================================ */
+const state={ session:null, carrito:[], likes:{}, adminOk:false, pin:"",
+  curDept:0, curPasillo:"A", curShop:0, ultimoRegistro:null,
+  adminRegs:[], adminFiltro:"pendiente" };
+try{ state.session=JSON.parse(store.get("mm_session")); }catch(e){}
+
+function money(n){return "$"+Number(n).toLocaleString("es-MX")+" MXN";}
+function fdate(iso){ if(!iso) return "—"; return new Date(iso).toLocaleDateString("es-MX",{day:"2-digit",month:"long",year:"numeric"}); }
+function addMonth(d){ const x=new Date(d); x.setMonth(x.getMonth()+1); return x; }
+function nuevoFolio(){ return "MM-"+Date.now().toString(36).toUpperCase().slice(-6); }
+const $=s=>document.querySelector(s);
+function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("on");clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove("on"),2800);}
+function copy(txt,label){const ta=document.createElement("textarea");ta.value=txt;document.body.appendChild(ta);ta.select();try{document.execCommand("copy");toast((label||"Copiado")+" — copiado al portapapeles");}catch(e){toast("No se pudo copiar");}document.body.removeChild(ta);}
+function openModal(h){$("#modalBox").innerHTML='<div class="grab"></div>'+h;$("#modalBg").classList.add("on");}
+function closeModal(){$("#modalBg").classList.remove("on");}
+$("#modalBg").addEventListener("click",e=>{if(e.target.id==="modalBg")closeModal();});
+function statusChip(s,venc){
+  if(s==="activo"&&venc) return '<span class="status ven">Renovación vencida</span>';
+  if(s==="activo") return '<span class="status act">Acceso activo</span>';
+  if(s==="rechazado") return '<span class="status rej">Rechazado</span>';
+  return '<span class="status pend">Pago en revisión</span>';
+}
+function vencido(r){ return r.status==="activo" && r.proximo_pago && new Date(r.proximo_pago)<new Date(); }
+
+/* ============================================================
+   ROUTER + CONTROL DE ACCESO
+   ============================================================ */
+const PROTECTED=["mercado","dept","shop","video","buscar","carrito"];
+const VIEWS={};
+function go(name,param){
+  if(PROTECTED.includes(name) && !(state.session && state.session.status==="activo")){
+    toast("El acceso al mercado requiere una membresía con pago validado");
+    name="acceso";
+  }
+  document.querySelectorAll(".view").forEach(v=>v.classList.remove("on"));
+  let el=$("#view-"+name);
+  if(!el){el=document.createElement("div");el.id="view-"+name;el.className="view";$("#views").appendChild(el);}
+  VIEWS[name]&&VIEWS[name](el,param);
+  el.classList.add("on");
+  document.querySelectorAll("#navbar button").forEach(b=>b.classList.toggle("on",b.dataset.nav===name));
+  window.scrollTo(0,0);
+}
+function renderNav(){
+  $("#navbar").innerHTML=[["mercado","Mercado","market"],["video","Video","video"],["buscar","Buscar","search"],["acceso","Acceso","key"],["perfil","Perfil","user"]]
+    .map(n=>`<button data-nav="${n[0]}">${ico(n[2],19)}${n[1]}</button>`).join("");
+  document.querySelectorAll("#navbar button").forEach(b=>b.addEventListener("click",()=>go(b.dataset.nav)));
+}
+function topbar(title,back,showCart){
+  return `<div class="topbar">
+    ${back?`<button class="tb-btn" onclick="go('${back}')">${ico("left",17)}</button>`:`<div class="tb-mark"><span>MM</span></div>`}
+    <h1>${title}</h1>
+    ${showCart?`<button class="tb-btn" onclick="go('carrito')">${ico("cart",16)}${state.carrito.length?`<b>${state.carrito.reduce((a,c)=>a+c.qty,0)}</b>`:""}</button>`:""}
+  </div>`;
+}
+
+/* ============================================================
+   LANDING
+   ============================================================ */
+VIEWS.landing=(el)=>{
+  el.innerHTML=`
+  ${topbar(CONFIG.APP_NAME)}
+  <div class="wrap">
+    <div class="hero-band">
+      <div class="hb-top">
+        <div class="eyebrow">Mercado digital · Ciudad de México</div>
+        <h2 class="title">El mercado tradicional,<br>operando en digital.</h2>
+        <p class="lead">Departamentos, pasillos y locales como en un mercado físico. Acceso exclusivo por membresía mensual, validada por la administración.</p>
+      </div>
+      <div class="hb-strip">
+        <div><b>30</b>Departamentos</div>
+        <div><b>${MARKET.shops.length}+</b>Locales</div>
+        <div><b>SPEI</b>Pago directo</div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <button class="btn btn-p" onclick="go('registro')">Solicitar membresía</button>
+      <button class="btn btn-o" onclick="go('acceso')">Ya tengo folio — consultar mi acceso</button>
+      <button class="btn btn-o" onclick="go('como')">Cómo funciona</button>
+    </div>
+    <div class="ticker"><div>Textiles · Abarrotes · Flores · Joyería · Electrónica · Ferretería · Cosméticos · Papelería · Fiestas · Muebles · Farmacia · Deportes · Textiles · Abarrotes · Flores · Joyería · Electrónica · Ferretería · Cosméticos · Papelería · Fiestas · Muebles · Farmacia · Deportes ·&nbsp;</div></div>
+    <div class="notice">
+      <b>Acceso por membresía.</b> El ingreso al mercado se habilita únicamente después de que la administración valida tu pago por transferencia SPEI. Cliente ${money(CONFIG.PRECIO_CLIENTE)}/mes · Local ${money(CONFIG.PRECIO_LOCAL)}/mes · Local Premium ${money(CONFIG.PRECIO_PREMIUM)}/mes.
+    </div>
+    <p style="text-align:center;margin-top:18px"><span class="conn-dot ${DB.mode==='online'?'online':''}">${DB.mode==="online"?"Sistema en línea":"Modo demostración"}</span></p>
+  </div>`;
+};
+
+/* ============================================================
+   CÓMO FUNCIONA
+   ============================================================ */
+VIEWS.como=(el)=>{
+  el.innerHTML=`
+  ${topbar("Cómo funciona","landing")}
+  <div class="wrap" style="padding-top:16px">
+    <div class="eyebrow">Proceso de alta</div>
+    <h2 class="title">Registro, pago y activación</h2>
+    <div class="panel" style="margin-top:10px">
+      <div class="steps">
+        <div class="step"><div><b>Solicita tu membresía</b><p>Elige tu plan (Cliente, Local Estándar o Local Premium) y registra tus datos. Recibirás un folio único.</p></div></div>
+        <div class="step"><div><b>Realiza tu transferencia SPEI</b><p>A la CLABE ${CONFIG.CLABE} (${CONFIG.BANCO}), a nombre de ${CONFIG.BENEFICIARIO}. Escribe tu folio en el concepto.</p></div></div>
+        <div class="step"><div><b>La administración valida tu pago</b><p>El pago llega directamente a la cuenta de la administración, que lo verifica y autoriza manualmente. Sin excepciones.</p></div></div>
+        <div class="step"><div><b>Se emite tu factura de pago</b><p>Al autorizarse, se genera tu comprobante de pago confirmado con la fecha de tu próxima renovación: un mes exacto después del pago.</p></div></div>
+        <div class="step"><div><b>Acceso habilitado</b><p>Entra con tu folio y teléfono. Podrás recorrer departamentos, pasillos, locales y el canal de video.</p></div></div>
+      </div>
+    </div>
+    <div class="sec"><h3>Tarifas mensuales</h3></div>
+    <div class="panel tight">
+      <div class="kv"><span>Cliente comprador</span><b>${money(CONFIG.PRECIO_CLIENTE)}</b></div>
+      <div class="kv"><span>Local Estándar</span><b>${money(CONFIG.PRECIO_LOCAL)}</b></div>
+      <div class="kv"><span>Local Premium</span><b>${money(CONFIG.PRECIO_PREMIUM)}</b></div>
+    </div>
+    <div class="notice warn" style="margin-top:14px"><b>Importante:</b> el acceso es obligatoriamente de paga. Ninguna cuenta se activa sin pago validado por la administración.</div>
+    <button class="btn btn-p" style="margin-top:16px" onclick="go('registro')">Solicitar membresía</button>
+  </div>`;
+};
+
+/* ============================================================
+   REGISTRO
+   ============================================================ */
+VIEWS.registro=(el)=>{
+  const planes=[
+    {k:"cliente",t:"Cliente comprador",p:CONFIG.PRECIO_CLIENTE,tag:"",items:["Acceso completo al mercado","Compra en cualquier local","Contacto directo con proveedores","Canal de video y transmisiones"]},
+    {k:"local",t:"Local Estándar",p:CONFIG.PRECIO_LOCAL,tag:"",items:["Local digital con ficha comercial","Catálogo de hasta 25 productos","Recepción de pedidos y mensajes","Presencia en su departamento"]},
+    {k:"premium",t:"Local Premium",p:CONFIG.PRECIO_PREMIUM,tag:"Recomendado",items:["Todo lo del plan Estándar","Catálogo sin límite de productos","Ubicación en Zona Premium","Transmisiones en vivo","Prioridad en resultados de búsqueda"]}
+  ];
+  let sel="cliente";
+  el.innerHTML=`
+  ${topbar("Solicitud de membresía","landing")}
+  <div class="wrap" style="padding-top:16px">
+    <div class="eyebrow">Paso 1 de 2</div>
+    <h2 class="title">Elige tu plan</h2>
+    <div style="margin-top:12px">
+      ${planes.map(p=>`
+      <div class="plan ${sel===p.k?'sel':''}" data-k="${p.k}">
+        ${p.tag?`<span class="p-tag">${p.tag}</span>`:""}
+        <h4>${p.t}</h4>
+        <div class="p-price">${money(p.p)} <small>/ mes · renovación a un mes exacto del pago</small></div>
+        <ul>${p.items.map(i=>`<li>${i}</li>`).join("")}</ul>
+      </div>`).join("")}
+    </div>
+    <div class="divider"></div>
+    <div class="eyebrow">Paso 2 de 2</div>
+    <h2 class="title" style="font-size:20px">Tus datos</h2>
+    <div style="margin-top:12px">
+      <div class="f-group"><label>Nombre completo</label><input id="rNombre" autocomplete="name"></div>
+      <div class="f-group"><label>Teléfono (10 dígitos)</label><input id="rTel" inputmode="tel" maxlength="14"></div>
+      <div class="f-group"><label>Correo electrónico</label><input id="rMail" inputmode="email" autocomplete="email"></div>
+      <div id="bizFields" style="display:none">
+        <div class="f-group"><label>Nombre del negocio</label><input id="rNeg"></div>
+        <div class="f-group"><label>Departamento solicitado</label><select id="rDept">${DEPTS.map(d=>`<option>${d}</option>`).join("")}</select></div>
+      </div>
+    </div>
+    <button class="btn btn-p" id="btnReg">Generar folio e instrucciones de pago</button>
+    <p style="font-size:11.5px;color:var(--dim);text-align:center;margin:12px 0;line-height:1.6">Al enviar tu solicitud aceptas que el acceso se habilita únicamente tras la validación manual de tu pago por parte de la administración.</p>
+  </div>`;
+  el.querySelectorAll(".plan").forEach(p=>p.addEventListener("click",()=>{
+    sel=p.dataset.k;
+    el.querySelectorAll(".plan").forEach(x=>x.classList.toggle("sel",x.dataset.k===sel));
+    $("#bizFields").style.display=sel==="cliente"?"none":"block";
+  }));
+  $("#btnReg").addEventListener("click",async()=>{
+    const nombre=$("#rNombre").value.trim(),tel=$("#rTel").value.trim(),mail=$("#rMail").value.trim();
+    const neg=sel!=="cliente"?$("#rNeg").value.trim():"";
+    const dept=sel!=="cliente"?$("#rDept").value:"";
+    if(!nombre||!tel||!mail) return toast("Completa nombre, teléfono y correo");
+    if(tel.replace(/\D/g,"").length<10) return toast("El teléfono debe tener 10 dígitos");
+    if(!/.+@.+\..+/.test(mail)) return toast("Revisa el correo electrónico");
+    if(sel!=="cliente"&&!neg) return toast("Escribe el nombre de tu negocio");
+    const plan=sel==="cliente"?"Cliente":(sel==="local"?"Local Estándar":"Local Premium");
+    const monto=sel==="cliente"?CONFIG.PRECIO_CLIENTE:(sel==="local"?CONFIG.PRECIO_LOCAL:CONFIG.PRECIO_PREMIUM);
+    const reg={folio:nuevoFolio(),nombre,telefono:tel,email:mail,tipo:sel,plan,monto,
+      negocio:neg,departamento:dept,status:"pendiente",fecha_registro:new Date().toISOString(),comprobante:""};
+    const btn=$("#btnReg"); btn.disabled=true; btn.textContent="Registrando…";
+    try{
+      await DB.crear(reg);
+      state.ultimoRegistro=reg;
+      store.set("mm_last_folio",reg.folio); store.set("mm_last_tel",tel);
+      go("pago");
+    }catch(e){ toast("No se pudo registrar: "+e.message); btn.disabled=false; btn.textContent="Generar folio e instrucciones de pago"; }
+  });
+};
+
+/* ============================================================
+   PAGO (instrucciones SPEI)
+   ============================================================ */
+VIEWS.pago=(el,regParam)=>{
+  const r=regParam||state.ultimoRegistro;
+  if(!r){go("landing");return;}
+  const resumen=`SOLICITUD DE MEMBRESIA — ${CONFIG.APP_NAME}
+Folio: ${r.folio}
+Nombre: ${r.nombre}
+Telefono: ${r.telefono}
+Correo: ${r.email}
+Plan: ${r.plan} — ${money(r.monto)}/mes${r.negocio?`
+Negocio: ${r.negocio} (${r.departamento})`:""}
+Pago SPEI a CLABE ${CONFIG.CLABE} (${CONFIG.BENEFICIARIO}).
+Adjunto comprobante de transferencia.`;
+  const wa=CONFIG.WHATSAPP_ADMIN?`https://wa.me/${CONFIG.WHATSAPP_ADMIN}?text=${encodeURIComponent(resumen)}`:null;
+  el.innerHTML=`
+  ${topbar("Instrucciones de pago","landing")}
+  <div class="wrap" style="padding-top:16px">
+    <div class="panel" style="text-align:center">
+      <div class="eyebrow">Solicitud registrada</div>
+      <h2 class="title" style="font-size:21px">Folio <span style="font-family:ui-monospace,Menlo,monospace">${r.folio}</span></h2>
+      <p class="lead" style="font-size:13px">Guarda este folio: lo necesitarás para consultar tu acceso.</p>
+      <div style="margin-top:12px">${statusChip("pendiente")}</div>
+      ${r.tipo!=="cliente"?'<p style="font-size:12px;color:var(--warn);margin-top:10px">Tu local quedará <b>en espera para comenzar a vender</b> hasta la validación del pago.</p>':""}
+    </div>
+    <div class="sec"><h3>Transferencia SPEI</h3></div>
+    <div class="panel tight">
+      <div class="kv"><span>Monto mensual</span><b style="font-family:var(--serif);font-size:18px">${money(r.monto)}</b></div>
+      <div class="kv"><span>CLABE</span><b class="mono">${CONFIG.CLABE}<button class="copybtn" onclick="copy('${CONFIG.CLABE}','CLABE')">Copiar</button></b></div>
+      <div class="kv"><span>Institución</span><b>${CONFIG.BANCO}</b></div>
+      <div class="kv"><span>Beneficiario</span><b>${CONFIG.BENEFICIARIO}</b></div>
+      <div class="kv"><span>Concepto de pago</span><b class="mono">${r.folio}<button class="copybtn" onclick="copy('${r.folio}','Folio')">Copiar</button></b></div>
+    </div>
+    <div class="notice" style="margin-top:14px">
+      <b>Proceso de validación.</b> Tu transferencia llega directamente a la cuenta de la administración. Una vez verificada, la administración autoriza tu acceso y se emite tu factura de pago confirmado. La renovación vence exactamente un mes después de la fecha de autorización.
+    </div>
+    ${wa?`<a href="${wa}" target="_blank" style="text-decoration:none"><button class="btn btn-p" style="margin-top:16px">Enviar comprobante por WhatsApp</button></a>`
+        :`<button class="btn btn-p" id="btnCopyReg" style="margin-top:16px">Copiar resumen para enviar con mi comprobante</button>`}
+    <button class="btn btn-o" style="margin-top:10px" onclick="go('acceso')">Consultar el estado de mi acceso</button>
+  </div>`;
+  const b=$("#btnCopyReg"); if(b)b.addEventListener("click",()=>copy(resumen,"Resumen de solicitud"));
+};
+
+/* ============================================================
+   ACCESO (consulta y entrada)
+   ============================================================ */
+VIEWS.acceso=(el)=>{
+  const s=state.session;
+  el.innerHTML=`
+  ${topbar("Acceso de miembros","landing")}
+  <div class="wrap" style="padding-top:16px">
+    ${s&&s.status==="activo"?`
+    <div class="panel">
+      <div class="eyebrow">Sesión activa</div>
+      <h2 class="title" style="font-size:20px">${s.nombre}</h2>
+      <div class="kv"><span>Folio</span><b class="mono">${s.folio}</b></div>
+      <div class="kv"><span>Plan</span><b>${s.plan}</b></div>
+      <div class="kv"><span>Próxima renovación</span><b>${fdate(s.proximo_pago)}</b></div>
+      <button class="btn btn-p" style="margin-top:14px" onclick="go('mercado')">Entrar al mercado</button>
+      <button class="btn btn-o" style="margin-top:9px" onclick="cerrarSesion()">Cerrar sesión</button>
+    </div>`:`
+    <div class="lock-box">
+      <div class="lk">${ico("lock",22,"var(--acc-l)")}</div>
+      <h3>Acceso exclusivo de miembros</h3>
+      <p>El mercado abre únicamente para membresías con pago validado por la administración. Ingresa tu folio y teléfono para consultar tu estado.</p>
+    </div>
+    <div class="panel">
+      <div class="f-group"><label>Folio (ej. MM-ABC123)</label><input id="aFolio" style="text-transform:uppercase" value="${store.get("mm_last_folio")||""}"></div>
+      <div class="f-group"><label>Teléfono registrado</label><input id="aTel" inputmode="tel" value="${store.get("mm_last_tel")||""}"></div>
+      <button class="btn btn-p" id="btnAcc">Consultar mi acceso</button>
+    </div>
+    <div id="accResult" style="margin-top:14px"></div>
+    <p style="text-align:center;margin-top:16px;font-size:13px;color:var(--mut)">¿Aún no tienes folio? <span style="color:var(--acc-l);font-weight:600;cursor:pointer" onclick="go('registro')">Solicita tu membresía</span></p>`}
+  </div>`;
+  const btn=$("#btnAcc");
+  if(btn)btn.addEventListener("click",async()=>{
+    const f=$("#aFolio").value.trim(),t=$("#aTel").value.trim();
+    if(!f||!t)return toast("Ingresa tu folio y tu teléfono");
+    btn.disabled=true;btn.textContent="Consultando…";
+    try{
+      const r=await DB.consultar(f,t);
+      const box=$("#accResult");
+      if(!r){ box.innerHTML=`<div class="notice warn"><b>No encontramos tu registro.</b> Verifica que el folio y el teléfono sean exactamente los de tu solicitud.</div>`; }
+      else if(r.status==="activo"&&!vencido(r)){
+        state.session={folio:r.folio,nombre:r.nombre,plan:r.plan,status:"activo",proximo_pago:r.proximo_pago,factura_folio:r.factura_folio,monto:r.monto,fecha_pago:r.fecha_pago};
+        store.set("mm_session",JSON.stringify(state.session));
+        toast("Acceso confirmado. Bienvenido, "+r.nombre.split(" ")[0]);
+        go("mercado"); return;
+      }
+      else if(r.status==="activo"&&vencido(r)){
+        box.innerHTML=`<div class="panel"><div style="margin-bottom:10px">${statusChip("activo",true)}</div>
+        <p style="font-size:13px;color:var(--mut);line-height:1.6">Tu membresía venció el <b style="color:var(--txt)">${fdate(r.proximo_pago)}</b>. Realiza tu transferencia de ${money(r.monto)} con tu folio en el concepto y la administración reactivará tu acceso.</p>
+        <div class="kv" style="margin-top:8px"><span>CLABE</span><b class="mono">${CONFIG.CLABE}<button class="copybtn" onclick="copy('${CONFIG.CLABE}','CLABE')">Copiar</button></b></div></div>`;
+      }
+      else if(r.status==="rechazado"){
+        box.innerHTML=`<div class="panel"><div style="margin-bottom:10px">${statusChip("rechazado")}</div>
+        <p style="font-size:13px;color:var(--mut);line-height:1.6">Tu solicitud no fue aprobada. Contacta a la administración para más información.</p></div>`;
+      }
+      else{
+        box.innerHTML=`<div class="panel"><div style="margin-bottom:10px">${statusChip("pendiente")}</div>
+        <p style="font-size:13px;color:var(--mut);line-height:1.6">Tu pago está <b style="color:var(--txt)">en revisión por la administración</b>. En cuanto se autorice, tu acceso quedará habilitado y podrás entrar por esta misma pantalla.</p>
+        <button class="btn btn-o btn-sm" style="margin-top:12px" onclick="verInstrucciones('${r.folio}',${r.monto})">Ver instrucciones de pago</button></div>`;
+      }
+    }catch(e){ toast("Error de conexión: "+e.message); }
+    btn.disabled=false;btn.textContent="Consultar mi acceso";
+  });
+};
+window.verInstrucciones=(folio,monto)=>{
+  openModal(`
+  <div class="eyebrow">Transferencia SPEI</div>
+  <h2 class="title" style="font-size:19px">Datos de pago</h2>
+  <div class="panel tight" style="margin-top:10px">
+    <div class="kv"><span>Monto</span><b>${money(monto)}</b></div>
+    <div class="kv"><span>CLABE</span><b class="mono">${CONFIG.CLABE}<button class="copybtn" onclick="copy('${CONFIG.CLABE}','CLABE')">Copiar</button></b></div>
+    <div class="kv"><span>Institución</span><b>${CONFIG.BANCO}</b></div>
+    <div class="kv"><span>Beneficiario</span><b>${CONFIG.BENEFICIARIO}</b></div>
+    <div class="kv"><span>Concepto</span><b class="mono">${folio}</b></div>
+  </div>
+  <button class="btn btn-o" style="margin-top:14px" onclick="closeModal()">Cerrar</button>`);
+};
+window.cerrarSesion=()=>{ state.session=null; store.del("mm_session"); toast("Sesión cerrada"); go("landing"); };
+
+/* ============================================================
+   MERCADO
+   ============================================================ */
+VIEWS.mercado=(el)=>{
+  el.innerHTML=`
+  ${topbar("Piso del mercado",null,true)}
+  <div class="wrap" style="padding-top:16px">
+    <div class="panel tight" style="display:flex;justify-content:space-between;align-items:center">
+      <div><b style="font-size:14px">${state.session.nombre.split(" ")[0]}, bienvenido al piso</b>
+      <p style="font-size:12px;color:var(--mut)">Membresía ${state.session.plan} · renueva ${fdate(state.session.proximo_pago)}</p></div>
+      ${statusChip("activo")}
+    </div>
+    <div class="sec"><h3>Departamentos</h3><span onclick="go('buscar')">Buscar</span></div>
+    <div class="dept-list">
+      ${DEPTS.map((d,i)=>`<div class="dept" onclick="openDept(${i})">
+        <div class="d-mk">${d.slice(0,2).toUpperCase()}</div>
+        <div><b>${d}</b><small>${MARKET.shops.filter(s=>s.dept===i).length} locales · Pasillos A–C</small></div>
+      </div>`).join("")}
+    </div>
+    <div class="sec"><h3>Zona Premium</h3><span onclick="go('video')">Canal de video</span></div>
+    ${MARKET.shops.filter(s=>s.premium).slice(0,4).map(shopCard).join("")}
+  </div>`;
+};
+function shopCard(s){
+  return `<div class="shopcard" onclick="openShop(${s.id})">
+    <div class="sc-top">
+      <div class="sc-mk">${s.ini}</div>
+      <div class="sc-t"><b>${s.nombre}${s.premium?'<span class="prem-chip">Premium</span>':""}</b>
+      <small>${DEPTS[s.dept]} · Calificación ${s.rating}</small></div>
+      <span class="sc-num">${s.num}</span>
+    </div>
+    <div class="sc-promo">${s.promo}</div>
+  </div>`;
+}
+window.openDept=(i)=>{state.curDept=i;state.curPasillo="A";go("dept");};
+VIEWS.dept=(el)=>{
+  const d=DEPTS[state.curDept];
+  const render=()=>{
+    const list=MARKET.shops.filter(s=>s.dept===state.curDept&&s.pasillo===state.curPasillo);
+    $("#deptShops").innerHTML=list.map(shopCard).join("")||`<div class="panel" style="text-align:center;color:var(--mut);font-size:13px">Pasillo disponible en renta. <span style="color:var(--acc-l);cursor:pointer;font-weight:600" onclick="go('registro')">Solicitar un local aquí</span></div>`;
+    document.querySelectorAll("#pTabs button").forEach(b=>b.classList.toggle("on",b.dataset.p===state.curPasillo));
+  };
+  el.innerHTML=`
+  ${topbar("Departamento de "+d,"mercado",true)}
+  <div class="wrap" style="padding-top:16px">
+    <div class="ptabs" id="pTabs">
+      ${["A","B","C"].map(p=>`<button data-p="${p}">Pasillo ${p}</button>`).join("")}
+      <button data-p="Premium">Zona Premium</button>
+    </div>
+    <div id="deptShops"></div>
+    <div class="divider"></div>
+    <div class="notice"><b>¿Vendes ${d.toLowerCase()}?</b> Renta un local en este departamento desde ${money(CONFIG.PRECIO_LOCAL)} al mes. <span style="color:var(--acc-l);cursor:pointer;font-weight:600" onclick="go('registro')">Solicitar local</span></div>
+  </div>`;
+  document.querySelectorAll("#pTabs button").forEach(b=>b.addEventListener("click",()=>{state.curPasillo=b.dataset.p;render();}));
+  render();
+};
+window.openShop=(id)=>{state.curShop=id;go("shop");};
+VIEWS.shop=(el)=>{
+  const s=MARKET.shops[state.curShop];
+  const prods=MARKET.products.filter(p=>p.shop===s.id);
+  el.innerHTML=`
+  ${topbar("Local "+s.num,"dept",true)}
+  <div class="wrap">
+    <div class="shop-head">
+      <div class="sh-row">
+        <div class="sh-mk">${s.ini}</div>
+        <div><h2>${s.nombre}</h2><div class="sh-meta">${DEPTS[s.dept]} · Local ${s.num} · Calificación ${s.rating}${s.premium?'<span class="prem-chip">Premium</span>':""}</div></div>
+      </div>
+      <div class="sh-desc">${s.desc}</div>
+      <div class="shop-acts">
+        <button onclick="toast('La mensajería directa se habilita en la siguiente versión')">Mensaje</button>
+        <button onclick="toast('Solicitud de cotización enviada al local')">Cotizar</button>
+        <button onclick="toast('Ahora sigues a este local')">Seguir</button>
+      </div>
+    </div>
+    <div class="notice warn">${s.promo}</div>
+    <div class="sec"><h3>Catálogo</h3><span>${prods.length} artículos</span></div>
+    ${prods.map(p=>`<div class="prodrow">
+      <div class="pr-mk">${p.name.slice(0,1)}</div>
+      <div class="pr-i"><b>${p.name}</b><small>${money(p.price)}</small></div>
+      <button onclick="addCart(${p.id})">Agregar</button>
+    </div>`).join("")}
+  </div>`;
+};
+
+/* ============================================================
+   CARRITO
+   ============================================================ */
+window.addCart=(pid)=>{
+  const it=state.carrito.find(c=>c.pid===pid);
+  it?it.qty++:state.carrito.push({pid,qty:1});
+  toast("Artículo agregado al pedido");
+  const v=$("#view-shop");if(v&&v.classList.contains("on"))VIEWS.shop(v);
+};
+VIEWS.carrito=(el)=>{
+  const items=state.carrito.map(c=>({...c,p:MARKET.products[c.pid]}));
+  const total=items.reduce((a,c)=>a+c.p.price*c.qty,0);
+  el.innerHTML=`
+  ${topbar("Mi pedido","mercado")}
+  <div class="wrap" style="padding-top:16px">
+    ${items.length?items.map(c=>`
+    <div class="cart-line">
+      <div class="pr-mk" style="width:38px;height:38px;border:1px solid var(--line2);border-radius:8px;background:var(--panel2);display:flex;align-items:center;justify-content:center;font-family:var(--serif);color:var(--mut)">${c.p.name.slice(0,1)}</div>
+      <div style="flex:1;min-width:0"><b style="font-size:13px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${c.p.name}</b><small style="color:var(--acc-l);font-weight:700;font-size:12px">${money(c.p.price)}</small></div>
+      <div class="qty"><button onclick="chQty(${c.pid},-1)">−</button><b>${c.qty}</b><button onclick="chQty(${c.pid},1)">+</button></div>
+    </div>`).join("")+`
+    <div class="panel tight" style="margin-top:14px">
+      <div class="kv"><span>Subtotal</span><b>${money(total)}</b></div>
+      <div class="kv"><span>Entrega</span><b>Por acordar con cada local</b></div>
+      <div class="kv" style="font-size:15px"><span>Total</span><b style="font-family:var(--serif);font-size:17px">${money(total)}</b></div>
+    </div>
+    <button class="btn btn-p" style="margin-top:14px" onclick="checkout(${total})">Enviar pedido</button>
+    <p style="font-size:11.5px;color:var(--dim);text-align:center;margin-top:10px">El pedido se coordina directamente con cada local. Pago de mercancía por SPEI o según acuerde con el proveedor.</p>`
+    :`<div class="lock-box"><div class="lk">${ico("cart",20,"var(--mut)")}</div><h3>Pedido vacío</h3><p>Recorre los departamentos y agrega artículos de los locales.</p><button class="btn btn-o btn-sm" style="margin:14px auto 0" onclick="go('mercado')">Ir al mercado</button></div>`}
+  </div>`;
+};
+window.chQty=(pid,d)=>{
+  const it=state.carrito.find(c=>c.pid===pid);
+  it.qty+=d;if(it.qty<=0)state.carrito=state.carrito.filter(c=>c.pid!==pid);
+  VIEWS.carrito($("#view-carrito"));
+};
+window.checkout=(total)=>{
+  openModal(`
+  <div class="eyebrow">Pedido registrado</div>
+  <h2 class="title" style="font-size:19px">Total ${money(total)}</h2>
+  <p class="lead" style="font-size:13px;margin-bottom:12px">Los locales involucrados recibirán tu pedido y te contactarán para acordar pago de mercancía y entrega.</p>
+  <button class="btn btn-p" onclick="closeModal();state.carrito=[];go('mercado');toast('Pedido enviado a los locales')">Confirmar</button>
+  <button class="btn btn-o" style="margin-top:9px" onclick="closeModal()">Seguir comprando</button>`);
+};
+
+/* ============================================================
+   VIDEO
+   ============================================================ */
+VIEWS.video=(el)=>{
+  el.innerHTML=`<div class="feed">
+    ${REELS.map((r,i)=>`
+    <div class="reel">
+      <div class="r-bg"><span>${r.mk}</span></div>
+      <div class="r-body">
+        <div class="r-who">
+          <div class="r-mk">${r.mk}</div>
+          <div><b>${r.who}${r.live?'<span class="live-dot">En vivo</span>':""}</b><small>${r.loc}</small></div>
+        </div>
+        <p>${r.cap}</p>
+        <div class="r-acts">
+          <button id="lk${i}" class="${state.likes[i]?'liked':''}" onclick="likeReel(${i})">${state.likes[i]?"Te gusta":"Me gusta"}</button>
+          <button onclick="copy(location.href,'Enlace')">Compartir</button>
+          <button class="r-buy" onclick="openShop(${(i*7)%MARKET.shops.length})">Ver local</button>
+        </div>
+      </div>
+    </div>`).join("")}
+  </div>`;
+};
+window.likeReel=(i)=>{
+  state.likes[i]=!state.likes[i];
+  const b=$("#lk"+i);b.classList.toggle("liked",state.likes[i]);
+  b.textContent=state.likes[i]?"Te gusta":"Me gusta";
+};
+
+/* ============================================================
+   BUSCAR
+   ============================================================ */
+VIEWS.buscar=(el)=>{
+  el.innerHTML=`
+  ${topbar("Buscar",null,true)}
+  <div class="wrap">
+    <div class="searchbox"><input id="q" placeholder="Producto, local o departamento" autocomplete="off"></div>
+    <div>${["Flores","Joyería","Electrónica","Abarrotes","Ferretería","Fiestas"].map(t=>`<span class="chip" onclick="setQ('${t}')">${t}</span>`).join("")}</div>
+    <div id="results" style="margin-top:14px"><p style="color:var(--dim);font-size:13px;text-align:center;padding:22px 0">Busca entre ${MARKET.products.length} productos y ${MARKET.shops.length} locales.</p></div>
+  </div>`;
+  $("#q").addEventListener("input",doSearch);
+};
+window.setQ=(t)=>{$("#q").value=t;doSearch();};
+window.doSearch=()=>{
+  const q=$("#q").value.trim().toLowerCase(),box=$("#results");
+  if(q.length<2){box.innerHTML="";return;}
+  const shops=MARKET.shops.filter(s=>(s.nombre+" "+DEPTS[s.dept]+" "+s.num).toLowerCase().includes(q)).slice(0,5);
+  const prods=MARKET.products.filter(p=>(p.name).toLowerCase().includes(q)).slice(0,10);
+  box.innerHTML=
+    (shops.length?`<div class="sec" style="margin-top:6px"><h3>Locales</h3></div>`+shops.map(shopCard).join(""):"")+
+    (prods.length?`<div class="sec"><h3>Productos</h3></div>`+prods.map(p=>`
+      <div class="prodrow" onclick="openShop(${p.shop})" style="cursor:pointer">
+        <div class="pr-mk">${p.name.slice(0,1)}</div>
+        <div class="pr-i"><b>${p.name}</b><small>${money(p.price)} · ${MARKET.shops[p.shop].nombre}</small></div>
+      </div>`).join(""):"")+
+    (!shops.length&&!prods.length?`<p style="color:var(--dim);text-align:center;padding:22px 0;font-size:13px">Sin resultados para “${q}”.</p>`:"");
+};
+
+/* ============================================================
+   PERFIL
+   ============================================================ */
+VIEWS.perfil=(el)=>{
+  const s=state.session;
+  el.innerHTML=`
+  ${topbar("Perfil")}
+  <div class="wrap" style="padding-top:16px">
+    ${s&&s.status==="activo"?`
+    <div class="panel">
+      <div class="eyebrow">Miembro activo</div>
+      <h2 class="title" style="font-size:20px">${s.nombre}</h2>
+      <div class="kv"><span>Folio</span><b class="mono">${s.folio}</b></div>
+      <div class="kv"><span>Plan</span><b>${s.plan} · ${money(s.monto)}/mes</b></div>
+      <div class="kv"><span>Último pago validado</span><b>${fdate(s.fecha_pago)}</b></div>
+      <div class="kv"><span>Próxima renovación</span><b>${fdate(s.proximo_pago)}</b></div>
+      ${s.factura_folio?`<button class="btn btn-o" style="margin-top:12px" onclick="facturaMiembro()">Ver mi factura de pago</button>`:""}
+      <button class="btn btn-d" style="margin-top:9px" onclick="cerrarSesion()">Cerrar sesión</button>
+    </div>`:`
+    <div class="lock-box">
+      <div class="lk">${ico("user",22,"var(--mut)")}</div>
+      <h3>Sin sesión activa</h3>
+      <p>Solicita tu membresía o consulta tu acceso con tu folio y teléfono.</p>
+      <div style="max-width:280px;margin:16px auto 0;display:flex;flex-direction:column;gap:9px">
+        <button class="btn btn-p btn-sm" onclick="go('registro')">Solicitar membresía</button>
+        <button class="btn btn-o btn-sm" onclick="go('acceso')">Consultar mi acceso</button>
+      </div>
+    </div>`}
+    <div class="sec"><h3>Información</h3></div>
+    <div style="display:flex;flex-direction:column;gap:9px">
+      <button class="btn btn-o" onclick="go('como')" style="justify-content:flex-start">Cómo funciona</button>
+      <button class="btn btn-o" onclick="go('soporte')" style="justify-content:flex-start">Soporte</button>
+      <button class="btn btn-o" onclick="go('admin')" style="justify-content:flex-start">${ico("shield",15)} &nbsp;Administración</button>
+    </div>
+    <p style="text-align:center;color:var(--dim);font-size:11px;margin-top:24px">${CONFIG.APP_NAME} · v2.0<br><span class="conn-dot ${DB.mode==='online'?'online':''}" style="margin-top:6px">${DB.mode==="online"?"Sistema en línea":"Modo demostración"}</span></p>
+  </div>`;
+};
+window.facturaMiembro=()=>{
+  const s=state.session;
+  openModal(facturaHTML({folio:s.folio,nombre:s.nombre,plan:s.plan,monto:s.monto,fecha_pago:s.fecha_pago,proximo_pago:s.proximo_pago,factura_folio:s.factura_folio})+
+  `<button class="btn btn-o" style="margin-top:14px" onclick="closeModal()">Cerrar</button>`);
+};
+
+VIEWS.soporte=(el)=>{
+  el.innerHTML=`
+  ${topbar("Soporte","perfil")}
+  <div class="wrap" style="padding-top:16px">
+    <div class="panel">
+      <div class="eyebrow">Atención a miembros</div>
+      <h2 class="title" style="font-size:19px">¿Necesitas ayuda?</h2>
+      <p class="lead" style="font-size:13px">Asistencia con registros, validación de pagos, renovaciones y locales.</p>
+      ${CONFIG.WHATSAPP_ADMIN?`<a href="https://wa.me/${CONFIG.WHATSAPP_ADMIN}" target="_blank" style="text-decoration:none"><button class="btn btn-p" style="margin-top:12px">Contactar por WhatsApp</button></a>`:""}
+    </div>
+    <div class="sec"><h3>Preguntas frecuentes</h3></div>
+    ${[["¿Cómo se paga la membresía?","Por transferencia SPEI a la CLABE "+CONFIG.CLABE+" ("+CONFIG.BANCO+"), a nombre de "+CONFIG.BENEFICIARIO+", con tu folio en el concepto."],
+      ["¿Cuándo se activa mi acceso?","Cuando la administración verifica tu transferencia y autoriza tu cuenta manualmente. Recibirás tu factura de pago confirmado."],
+      ["¿Cuándo vence mi membresía?","Un mes exacto después de la fecha en que se autorizó tu pago. La fecha aparece en tu perfil y en tu factura."],
+      ["¿Qué pasa si no renuevo?","Tu acceso se suspende automáticamente al vencer y se reactiva cuando la administración valida tu nuevo pago."],
+      ["Soy locatario, ¿cuándo puedo vender?","Tu local permanece en espera para comenzar a vender hasta que tu pago sea validado."]]
+      .map(f=>`<div class="panel tight" style="margin-bottom:9px"><b style="font-size:13.5px">${f[0]}</b><p style="color:var(--mut);font-size:12.5px;margin-top:5px;line-height:1.6">${f[1]}</p></div>`).join("")}
+  </div>`;
+};
+
+/* ============================================================
+   ADMINISTRACIÓN
+   ============================================================ */
+VIEWS.admin=async(el)=>{
+  if(!state.adminOk){
+    if(DB.mode==="online"){
+      el.innerHTML=`
+      ${topbar("Administración","perfil")}
+      <div class="wrap" style="padding-top:16px">
+        <div class="lock-box">
+          <div class="lk">${ico("shield",22,"var(--acc-l)")}</div>
+          <h3>Acceso restringido</h3>
+          <p>Inicia sesión con tu cuenta de administrador.</p>
+        </div>
+        <div class="panel">
+          <div class="f-group"><label>Correo</label><input id="admMail" inputmode="email"></div>
+          <div class="f-group"><label>Contraseña</label><input id="admPass" type="password"></div>
+          <button class="btn btn-p" id="admBtn">Iniciar sesión</button>
+        </div>
+      </div>`;
+      $("#admBtn").addEventListener("click",async()=>{
+        const b=$("#admBtn");b.disabled=true;b.textContent="Verificando…";
+        try{ await DB.adminLogin($("#admMail").value.trim(),$("#admPass").value); state.adminOk=true; go("admin"); }
+        catch(e){ toast(e.message); b.disabled=false; b.textContent="Iniciar sesión"; }
+      });
+    }else{
+      el.innerHTML=`
+      ${topbar("Administración","perfil")}
+      <div class="pin-wrap">
+        ${ico("shield",30,"var(--acc-l)")}
+        <h2 class="title" style="font-size:18px;margin-top:10px">PIN de administrador</h2>
+        <p style="color:var(--dim);font-size:12px">Modo demostración</p>
+        <div class="pin-dots">${[0,1,2,3].map(i=>`<i id="pd${i}"></i>`).join("")}</div>
+        <div class="pin-grid">
+          ${[1,2,3,4,5,6,7,8,9].map(n=>`<button onclick="pinKey('${n}')">${n}</button>`).join("")}
+          <button onclick="pinKey('C')" style="color:var(--danger)">C</button>
+          <button onclick="pinKey('0')">0</button>
+          <button onclick="pinKey('<')" style="color:var(--mut)">←</button>
+        </div>
+      </div>`;
+    }
+    return;
+  }
+  el.innerHTML=`${topbar("Panel de administración","perfil")}<div class="wrap" style="padding-top:14px" id="admBody"><p style="color:var(--dim);text-align:center;padding:30px 0">Cargando registros…</p></div>`;
+  try{ state.adminRegs=await DB.listar(); }catch(e){ $("#admBody").innerHTML=`<div class="notice warn">Error al cargar: ${e.message}</div>`; return; }
+  renderAdmin();
+};
+function renderAdmin(){
+  const regs=state.adminRegs;
+  const pend=regs.filter(r=>r.status==="pendiente").length;
+  const act=regs.filter(r=>r.status==="activo"&&!vencido(r)).length;
+  const ven=regs.filter(r=>vencido(r)).length;
+  const ingreso=regs.filter(r=>r.status==="activo").reduce((a,r)=>a+Number(r.monto),0);
+  const f=state.adminFiltro;
+  const list=regs.filter(r=>
+    f==="todos"?true:
+    f==="pendiente"?r.status==="pendiente":
+    f==="activo"?(r.status==="activo"&&!vencido(r)):
+    f==="vencido"?vencido(r):
+    r.status==="rechazado");
+  $("#admBody").innerHTML=`
+    <div class="stat-row">
+      <div class="stat"><b style="color:var(--warn)">${pend}</b><span>Por validar</span></div>
+      <div class="stat"><b style="color:var(--acc-l)">${act}</b><span>Activos</span></div>
+      <div class="stat"><b>${money(ingreso).replace(" MXN","")}</b><span>Mensual</span></div>
+    </div>
+    <div class="notice" style="margin-top:12px">
+      <b>Flujo de autorización.</b> Verifica la transferencia SPEI en tu cuenta (${CONFIG.BANCO}, CLABE terminación ${CONFIG.CLABE.slice(-4)}). Localiza el folio en el concepto y presiona <b>Autorizar pago</b>: el acceso se habilita, se emite la factura y la renovación queda a un mes exacto.
+    </div>
+    <div class="atabs">
+      ${[["pendiente","Por validar ("+pend+")"],["activo","Activos ("+act+")"],["vencido","Vencidos ("+ven+")"],["rechazado","Rechazados"],["todos","Todos ("+regs.length+")"]]
+        .map(t=>`<button class="${f===t[0]?'on':''}" onclick="admFiltro('${t[0]}')">${t[1]}</button>`).join("")}
+    </div>
+    ${list.length?list.map(r=>`
+    <div class="reg">
+      <div class="rg-top">
+        <div><b>${r.nombre}</b><small>${r.folio} · ${fdate(r.fecha_registro)}</small></div>
+        ${statusChip(r.status,vencido(r))}
+      </div>
+      <div class="rg-det">
+        Tel: <b>${r.telefono}</b> · Correo: <b>${r.email}</b><br>
+        Plan: <b>${r.plan}</b> · <b>${money(r.monto)}/mes</b>
+        ${r.negocio?`<br>Negocio: <b>${r.negocio}</b> · Depto: ${r.departamento}`:""}
+        ${r.status==="activo"?`<br>Pago validado: <b>${fdate(r.fecha_pago)}</b> · Próxima renovación: <b>${fdate(r.proximo_pago)}</b> · Factura <b>${r.factura_folio||"—"}</b>`:""}
+      </div>
+      <div class="rg-btns">
+        ${r.status==="pendiente"?`
+          <button class="btn btn-p btn-sm" onclick="autorizar(${r.id})">Autorizar pago</button>
+          <button class="btn btn-d btn-sm" onclick="rechazar(${r.id})">Rechazar</button>`
+        :r.status==="activo"&&vencido(r)?`
+          <button class="btn btn-p btn-sm" onclick="autorizar(${r.id})">Validar renovación</button>
+          <button class="btn btn-o btn-sm" onclick="verFactura(${r.id})">Última factura</button>`
+        :r.status==="activo"?`
+          <button class="btn btn-o btn-sm" onclick="verFactura(${r.id})">Ver factura</button>
+          <button class="btn btn-d btn-sm" onclick="suspender(${r.id})">Suspender</button>`
+        :`<button class="btn btn-o btn-sm" onclick="reactivar(${r.id})">Mover a pendiente</button>`}
+      </div>
+    </div>`).join(""):`<div class="panel" style="text-align:center;color:var(--dim);font-size:13px;padding:26px">Sin registros en este filtro.</div>`}
+    <div style="display:flex;gap:9px;margin-top:14px">
+      <button class="btn btn-o" onclick="exportCSV()">Exportar CSV</button>
+      <button class="btn btn-d" onclick="state.adminOk=false;state.pin='';go('perfil');toast('Sesión de administración cerrada')">Salir</button>
+    </div>
+    ${DB.mode==="demo"?`<div class="notice warn" style="margin-top:14px"><b>Modo demostración.</b> Estos registros solo existen en este navegador. Conecta la base de datos (ver GUIA-INSTALACION) para operar con clientes reales en múltiples dispositivos.</div>`:""}`;
+}
+window.admFiltro=(f)=>{state.adminFiltro=f;renderAdmin();};
+window.pinKey=(k)=>{
+  if(k==="C")state.pin="";
+  else if(k==="<")state.pin=state.pin.slice(0,-1);
+  else if(state.pin.length<4)state.pin+=k;
+  [0,1,2,3].forEach(i=>$("#pd"+i)&&$("#pd"+i).classList.toggle("f",i<state.pin.length));
+  if(state.pin.length===4){
+    if(state.pin===CONFIG.ADMIN_PIN_DEMO){state.adminOk=true;go("admin");}
+    else{state.pin="";[0,1,2,3].forEach(i=>$("#pd"+i).classList.remove("f"));toast("PIN incorrecto");}
+  }
+};
+window.autorizar=async(id)=>{
+  const r=state.adminRegs.find(x=>x.id===id);
+  const now=new Date();
+  const fields={status:"activo",fecha_pago:now.toISOString(),proximo_pago:addMonth(now).toISOString(),
+    factura_folio:"F-"+String((state.adminRegs.filter(x=>x.factura_folio).length+1)).padStart(4,"0")};
+  try{ await DB.actualizar(id,fields); Object.assign(r,fields);
+    toast("Pago autorizado — acceso habilitado para "+r.nombre.split(" ")[0]);
+    renderAdmin(); setTimeout(()=>verFactura(id),300);
+  }catch(e){ toast("Error: "+e.message); }
+};
+window.rechazar=async(id)=>{ const r=state.adminRegs.find(x=>x.id===id); try{ await DB.actualizar(id,{status:"rechazado"}); r.status="rechazado"; renderAdmin(); }catch(e){toast("Error: "+e.message);} };
+window.suspender=async(id)=>{ const r=state.adminRegs.find(x=>x.id===id); try{ await DB.actualizar(id,{status:"pendiente"}); r.status="pendiente"; toast("Cuenta suspendida"); renderAdmin(); }catch(e){toast("Error: "+e.message);} };
+window.reactivar=async(id)=>{ const r=state.adminRegs.find(x=>x.id===id); try{ await DB.actualizar(id,{status:"pendiente"}); r.status="pendiente"; renderAdmin(); }catch(e){toast("Error: "+e.message);} };
+function facturaHTML(r){
+  return `<div class="factura" id="factuBox">
+    <div class="fx-head">
+      <div><h4>${CONFIG.APP_NAME}</h4><small>Comprobante de pago de membresía</small></div>
+      <div class="fx-folio">FACTURA<b>${r.factura_folio||"—"}</b></div>
+    </div>
+    <div class="fx-line"><span>Miembro</span><b>${r.nombre}</b></div>
+    <div class="fx-line"><span>Folio de membresía</span><b>${r.folio}</b></div>
+    <div class="fx-line"><span>Concepto</span><b>Membresía mensual — ${r.plan}</b></div>
+    <div class="fx-line"><span>Método de pago</span><b>Transferencia SPEI</b></div>
+    <div class="fx-line"><span>Cuenta receptora</span><b>CLABE terminación ${CONFIG.CLABE.slice(-4)}</b></div>
+    <div class="fx-line"><span>Fecha de pago validado</span><b>${fdate(r.fecha_pago)}</b></div>
+    <div class="fx-line"><span>Vigencia hasta</span><b>${fdate(r.proximo_pago)}</b></div>
+    <div class="fx-total"><span>TOTAL PAGADO</span><b>${money(r.monto)}</b></div>
+    <div class="fx-stamp">Pago confirmado</div>
+    <div class="fx-note">Pago verificado y autorizado por la administración de ${CONFIG.APP_NAME}.<br>Documento de control interno. Renovación: un mes exacto a partir de la fecha de validación.</div>
+  </div>`;
+}
+window.verFactura=(id)=>{
+  const r=state.adminRegs.find(x=>x.id===id);
+  openModal(facturaHTML(r)+`
+  <button class="btn btn-p" style="margin-top:14px" onclick="copy(document.getElementById('factuBox').innerText,'Factura')">Copiar factura para enviarla al miembro</button>
+  <button class="btn btn-o" style="margin-top:9px" onclick="closeModal()">Cerrar</button>`);
+};
+window.exportCSV=()=>{
+  const head="folio,status,nombre,telefono,email,plan,monto,negocio,departamento,fecha_registro,fecha_pago,proximo_pago,factura";
+  const rows=state.adminRegs.map(r=>[r.folio,r.status,r.nombre,r.telefono,r.email,r.plan,r.monto,r.negocio||"",r.departamento||"",r.fecha_registro||"",r.fecha_pago||"",r.proximo_pago||"",r.factura_folio||""]
+    .map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(","));
+  const csv=head+"\n"+rows.join("\n");
+  try{
+    const a=document.createElement("a");
+    a.href=URL.createObjectURL(new Blob(["﻿"+csv],{type:"text/csv"}));
+    a.download="registros-mercados-mexicanos.csv"; a.click();
+    toast("CSV descargado");
+  }catch(e){ copy(csv,"CSV de registros"); }
+};
+
+/* ============================================================
+   ARRANQUE
+   ============================================================ */
+(async()=>{
+  renderNav();
+  await DB.init();
+  setTimeout(()=>{
+    $("#splash").classList.add("hide");
+    $("#app").classList.add("on");
+    go("landing");
+    setTimeout(()=>{const s=$("#splash");s&&s.remove();},600);
+  },1800);
+})();
+</script>
+</body>
+</html>
